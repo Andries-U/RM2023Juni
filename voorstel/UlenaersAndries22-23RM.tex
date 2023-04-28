@@ -15,7 +15,7 @@
 \academicyear{2022-2023} 
 
 % TODO (fase 1): Werktitel
-\title{Werktitel van het voorstel}
+\title{Automatiseren en optimaliseren van de kwaliteitscontrole (QC) test op een PET-CT-scanner.}
 
 
 \author{Andries Ulenaers}
@@ -36,22 +36,26 @@
 % - Als het onderzoek niet past binnen een van deze domeinen specifieer je deze
 %   zelf
 %
-\specialisation{Nuclear medicine \& Enterprise development}
+\specialisation{Mobile \& Enterprise development}
 % Geef hier enkele sleutelwoorden die je onderwerp beschrijven
-\keywords{Development, Nuclear medicine, Image recognition, Process automation}
+\keywords{nucleaire geneeskunde, beeldverwerking, dicom, development, proces automatisatie}
 
 \begin{document}
 
 \begin{abstract}
-  Deze bachelorproef onderzoekt het automatiseren van de werkwijze voor het analyseren van controletesten met als doel om de nauwkeurigheid en betrouwbaarheid van de PET-beelden van PET-CT scanners te valideren. Het voornaamste technische obstakel voor het automatiseren is het toepassen van objectherkenning op de beelden. Hiermee zal het handmatig aftekenen van het object op de beelden niet meer nodig zijn, waardoor de efficiëntie en nauwkeurigheid verbeteren. Ook zal er hierdoor minder precisie nodig zijn bij het uitvoeren van de metingen omdat het object niet op exact dezelfde plaats moet staan bij elke slice.
-
-  Vanwege wereldwijd versplinterde wetgeving en een beperkt aantal producenten van PET-CT scanners. Zijn controle organismes verplicht om eigen processen te ontwikkelen voor het controleren van deze toestellen. Omdat binnen deze organisaties tijd en kennis beperkt zijn voor development heeft de huidige werkwijze nog manuele handelingen nodig van ongeveer 1 uur. Door een eenmalige inspanning van tijd en financieen kan deze hier tijd bespaard worden.
-
-  Deze scriptie vergelijkt de plugins testerom en testerdom met handmatig werk op vlak van nauwkeurigheid en betrouwbaarheid. Deze plugins zijn gekozen eenderzijds vanwege hun populariteit die leidt tot een grote hoeveelheid resources en anderzijds hun compatibiliteit binnen de bestaande software-suite van de organisatie. Met beide plugins werd een proof-of-concept gebouwd die naadloos de resultaten doorgeeft aan Excel voor de verdere rapportage binnen het bestaande proces voor rapportering. Hiernaast genereert deze ook een afzonderlijk rapport voor latere manuele controle indien er twijfel ontstaat over de resultaten.
-
-  Uit het onderzoek blijkt dat de objectherkenning en de implementatie voldoen aan de eisen voor correctheid en zeker van proof-of-concept over kunnen gaan tot productiewaardige software. Ook geeft de proof-of-concept genoeg vertrouwen dat de gewonnen tijd, kennis en nauwkeurigheid de kosten voor de ontwikkeling overstijgen.
+    
+ Deze bachelorproef onderzoekt het automatiseren van de analyse van de kwaliteitscontrole (QC) test op een PET-CT-scanner.  Het doel van QC testen is om de nauwkeurigheid en betrouwbaarheid van de PET-beelden van de PET-CT scanner te valideren. Het voornaamste technische obstakel voor het automatiseren van de huidige workflow is het herkennen van het gescande object op de bekomen DICOM-beelden. \medskip
+ 
+ Vanwege wereldwijd verschillende wetgeving en een beperkt aantal producenten van PET-CT scanners, zijn controle-organismen verplicht om hun eigen processen te ontwikkelen voor het controleren van PET/CT-toestellen. Omdat binnen deze organisaties tijd en kennis voor development beperkt zijn, heeft de huidige werkwijze nog heel wat manuele handelingen. Dit met gevolg dat er momenteel ongeveer 1 uur per scanner nodig is om de QC test te verwerken. Door een eenmalige inspanning van tijd en financiën voor het automatiseren van het analyseproces, zal de verwerkingstijd drastisch verminderen.\medskip
+ 
+ Deze scriptie vergelijkt object bepaling met OpenCV en imageJ op vlak van nauwkeurigheid en betrouwbaarheid t.o.v. de huidige handmatige object bepaling. Deze programma’s zijn enerzijds gekozen vanwege hun goede documentatie en actieve community en anderzijds hun compatibiliteit met de gebruikte software van de organisatie. Met imageJ werd een proof-of-concept gebouwd dat naadloos de resultaten doorgeeft aan Excel voor de verdere rapportage binnen het bestaande rapporteringsproces. Hiernaast genereert deze ook een afzonderlijk rapport voor latere manuele controle indien er twijfel ontstaat over de resultaten.\medskip
+ 
+ Uit het onderzoek volgt dat de objectbepaling en de implementatie gebruikmakend van imageJ, voldoet aan de eisen voor correctheid. Er kan dus van proof-of-concept worden overgaan naar productiewaardige software. Ook geeft het proof-of-concept genoeg vertrouwen dat de gewonnen tijd, kennis en nauwkeurigheid de kosten voor de ontwikkeling overstijgen.\medskip
+ 
   
 \end{abstract}
+
+
 
 \tableofcontents
 
@@ -71,13 +75,19 @@
 
 % TODO: (fase 1) introduceer je gekozen onderwerp, formuleer de onderzoeksvraag en deelvragen. Wat is de doelstelling (is die S.M.A.R.T.?), wat zal het resultaat zijn van het onderzoek (een Proof-of-Concept, een prototype, een advies, ...)? Waarom is het nuttig om dit onderwerp te onderzoeken?
 
-Vanuit een belgisch controle-organisme gespecialiseerd in nucleaire geneeskunde kwam de vraag om een add-on of alleenstaande tool te ontwikkelen. Deze tool moet het handmatig tekenwerk van hun fysici verlichten. De tool dient voor het controleren van de correcte werking van PET-CT scanners. In de huidige werkwijze wordt er te veel vertrouwen gelegd bij de interne testen van de verschillende fabrikanten van de toestellen. Deze interne testen zijn volledig afgeschermd. Hierdoor weten de fysici niet of de toestellen wel voldoen aan de gestelde eisen en zijn de criteria ook verschillend per fabrikant. 
+Vanuit een Belgisch controle-organisme gespecialiseerd in nucleaire geneeskunde kwam de vraag om software te ontwikkelen voor het automatiseren van de analyse van de kwaliteitscontrole (QC) test op een PET-CT-scanner. In het huidige proces wordt er te veel vertrouwen gelegd bij de interne testen van de verschillende fabrikanten van de toestellen. Deze interne testen zijn volledig afgeschermd, hierdoor weten de fysici niet of de toestellen wel voldoen aan de gestelde interne eisen alsook de Belgische wetgeving en moeten ze vertrouwen op ingebouwde van de fabrikant zonder te weten wat ze precies meten en hoe deze precies werken.
 
-Momenteel hebben ze al een eigen gestandardiseerde methode. Enkel moet hierbij op alle slices van de DICOM beelden verkregen bij de testscan de outline van het testobject getekend worden alsook de omzetfactor van grijswaardes naar activiteit. Het doel van de tool is om de beelden in te laden, dan via objectherkenning zelf het testobject af te tekenen om uiteindelijk via enkele berekeningen aan de hand van de grijswaarde een omzetfactor tussen meting en werkelijkheid te bekomen. De uitkomst moet dan automatisch in de excel-file van het keuringsverslag komen. Ook wensen ze de ruwe data, liefst al afgetekend, te bewaren voor manuele hercontrole indien gewenst. 
 
-In dit onderzoek word onderzocht of de beeldherkinning mogelijk is met ImageJ, het programma dat al gebruikt wordt binnen de firma, of dat er mogelijks met andere technologie gewerkt moet worden. Hierna moet gevalideerd worden dat de beeldherkenning betrouwbaar genoeg is om in productie te nemen en op te vertrouwen als keurresultaat.
 
-Indien de proof-of-concept voldoet kan de firma veel werkuren besparen. Hierdoor zal er meer tijd beschikbaar zijn om verbeteringsprojecten op te starten in samenwerking met de verschillende diensten nucleaire geneeskunde waarmee ze samenwerken. Dit zal zowel patienten als personeel ten goede komen.
+Momenteel hebben ze al een proces voor een onafhankelijke controle, enkel moet hierbij op alle slices van de verkregen DICOM beelden de outline van het testobject afgetekend worden, dit om de omzetfactor van grijswaarden naar activiteit te berekenen, deze is nodig om verdere berekeningen te doen. Het doel van de software is om de beelden in te laden, dan via objectherkenning automatisch het testobject af te tekenen om uiteindelijk een omzetfactor tussen meting en werkelijkheid te berekenen. De uitkomst moet dan automatisch in de Excel-file van het keuringsverslag komen. Ook wensen ze de ruwe data, liefst al afgetekend, te bewaren voor een manuele controle indien gewenst.
+
+
+
+Het voorgestelde onderzoek bekijkt eerst of de beeldherkenning mogelijk is met imageJ, een programma dat al gebruikt wordt binnen de firma, of dat mogelijk andere software gebruikt moet worden. Hierna wordt gecontroleerd of de beeldherkenning betrouwbaar genoeg is om in de software mee te bouwen.
+
+
+
+Indien de proof-of-concept voldoet kan de firma veel werkuren besparen, momenteel duurt het te automatiseren proces ongeveer 1 uur per scanner. Hierdoor zal er meer tijd beschikbaar zijn om verbeteringsprojecten op te starten in samenwerking met de verschillende diensten nucleaire geneeskunde waarmee ze samenwerken. Dit zal zowel patiënten als personeel ten goede komen.
 
 
 \section{Literatuurstudie}%
@@ -89,6 +99,12 @@ Indien de proof-of-concept voldoet kan de firma veel werkuren besparen. Hierdoor
 % \autocite{BIBTEXKEY} -> (Auteur, jaartal)
 % \textcite{BIBTEXKEY} -> Auteur (jaartal)
 Voorbeeld van een referentie waar de auteursnaam geen onderdeel van de zin is~\autocite{Moore2002}.
+
+\autocite{Hykes2013}
+
+\autocite{LewisFowler2014}
+
+\autocite{Ansible2023}
 
 \lipsum[4-9]
 
