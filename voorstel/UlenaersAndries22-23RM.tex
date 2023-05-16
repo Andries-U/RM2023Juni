@@ -76,20 +76,9 @@
 % TODO: (fase 1) introduceer je gekozen onderwerp, formuleer de onderzoeksvraag en deelvragen. Wat is de doelstelling (is die S.M.A.R.T.?), wat zal het resultaat zijn van het onderzoek (een Proof-of-Concept, een prototype, een advies, ...)? Waarom is het nuttig om dit onderwerp te onderzoeken?
 
 Vanuit een Belgisch controle-organisme gespecialiseerd in nucleaire geneeskunde kwam de vraag om software te ontwikkelen voor het automatiseren van de analyse van de kwaliteitscontrole (QC) test op een PET-CT-scanner. In het huidige proces wordt er te veel vertrouwen gelegd bij de interne testen van de verschillende fabrikanten van de toestellen. Deze interne testen zijn volledig afgeschermd, hierdoor weten de fysici niet of de toestellen wel voldoen aan de gestelde interne eisen alsook de Belgische wetgeving en moeten ze vertrouwen op ingebouwde van de fabrikant zonder te weten wat ze precies meten en hoe deze precies werken.
-
-
-
 Momenteel hebben ze al een proces voor een onafhankelijke controle, enkel moet hierbij op alle slices van de verkregen DICOM beelden de outline van het testobject afgetekend worden, dit om de omzetfactor van grijswaarden naar activiteit te berekenen, deze is nodig om verdere berekeningen te doen. Het doel van de software is om de beelden in te laden, dan via objectherkenning automatisch het testobject af te tekenen om uiteindelijk een omzetfactor tussen meting en werkelijkheid te berekenen. De uitkomst moet dan automatisch in de Excel-file van het keuringsverslag komen. Ook wensen ze de ruwe data, liefst al afgetekend, te bewaren voor een manuele controle indien gewenst.
-
-
-
 Het voorgestelde onderzoek bekijkt eerst of de beeldherkenning mogelijk is met imageJ, een programma dat al gebruikt wordt binnen de firma, of dat mogelijk andere software gebruikt moet worden. Hierna wordt gecontroleerd of de beeldherkenning betrouwbaar genoeg is om in de software mee te bouwen.
-
-
-
 Indien de proof-of-concept voldoet kan de firma veel werkuren besparen, momenteel duurt het te automatiseren proces ongeveer 1 uur per scanner. Hierdoor zal er meer tijd beschikbaar zijn om verbeteringsprojecten op te starten in samenwerking met de verschillende diensten nucleaire geneeskunde waarmee ze samenwerken. Dit zal zowel patiënten als personeel ten goede komen.
-
-
 \section{Literatuurstudie}%
 \label{sec:literatuurstudie}
 
@@ -98,13 +87,13 @@ Indien de proof-of-concept voldoet kan de firma veel werkuren besparen, momentee
 % Refereren naar de literatuur kan met:
 % \autocite{BIBTEXKEY} -> (Auteur, jaartal)
 % \textcite{BIBTEXKEY} -> Auteur (jaartal)
-Voorbeeld van een referentie waar de auteursnaam geen onderdeel van de zin is~\autocite{Moore2002}.
+% Voorbeeld van een referentie waar de auteursnaam geen onderdeel van de zin is~\autocite{Moore2002}.
 
-\autocite{Hykes2013}
+% \autocite{Hykes2013}
 
-\autocite{LewisFowler2014}
+% \autocite{LewisFowler2014}
 
-\autocite{Ansible2023}
+% \autocite{Ansible2023}
 
 \lipsum[4-9]
 
@@ -112,8 +101,15 @@ Voorbeeld van een referentie waar de auteursnaam geen onderdeel van de zin is~\a
 \label{sec:methodologie}
 
 % TODO: (fase 5) beschrijf in detail in welke fasen je onderzoek uiteenvalt, hoe lang elke fase duurt en wat het concrete resultaat van elke fase is. Welke onderzoekstechniek ga je toepassen om elk van je onderzoeksvragen te beantwoorden? Gebruik je hiervoor experimenten, vragenlijsten, simulaties? Je beschrijft ook al welke tools je denkt hiervoor te gebruiken of te ontwikkelen.
+In deze thesis wordt onderzocht hoe de analyse van de uniformiteit Quality Control (QC) test van een PET/CT-scanner geoptimaliseerd en geautomatiseerd kan worden. Hierbij wordt bekeken  of ImageJ op  een minstens even kwalitatieve manier als een Medical Physicst Expert (MPE)  Regions Of Interest ( ROIs) kan aftekenen. Hiervoor is een plug-in voor ImageJ geschreven. Er wordt onderzocht of deze plug-in  objectief betere resultaten kan behalen. Zowel de verkregen kwantitatieve gegevens als de kwalitatieve subjectieve beoordeling van MPE’s wordt vergeleken. De kwantitatieve data wordt bekomen zoals het Belgische Technische regelement (TR) van een PET/CT-scanner het beschrijft. \textcite{FANC2020}
 
-\lipsum[10-12]
+De vier voorgestelde methoden worden gebruikt om ROI's te bepalen op 15 verschillende beeldreeksen. Deze beelden zijn historische uniformiteit opnames elk gemaakt met verschillende PET/CT-scanners. De kwantitatieve waarden (gemiddelde waarde, oppervlakte en standaard deviatie) die worden verkregen op basis van de bekomen ROI's zullen we onderling vergelijken alsook met de waarden die zijn vastgelegd in het verslag opgesteld door een  MPE. 
+
+Op basis van de verkregen resultaten wordt beoordeeld welke technieken de meest vergelijkbare waarden opleveren in vergelijking met de resultaten van een MPE Vervolgens wordt, ter controle,  geanalyseerd hoeveel de afgetekende ROI's met de verschillende technieken afwijken van een perfecte cirkel, indien van toepassing, aangezien het gemeten object  een cirkel is.
+
+Daarnaast zullen worden de beelden, zowel die bekomen door de plug-in als die van de MPE, geanonimiseerd zodat de oorsprong van de beelden niet herkenbaar is. Twee MPE’s  zullen de ROI's beoordelen op een schaal van 1 tot en met 5 om te bepalen hoe bruikbaar, nauwkeurig en correct ze zijn afgetekend. Vanwege het beperkte aantal MPE’s  in België beperkt deze thesis zich tot 2 individuen Aan de hand hiervan kunnen we beoordelen in hoeverre bepaalde technieken afwijken, positief of negatief, ten opzichte van de ROI’s die bekomen zijn door de MPE in het verslag.
+
+Op basis van zowel de kwantitatieve als de kwalitatieve resultaten wordt de "beste" analysetechniek geïdentificeerd. Bovendien kan er door het vergelijken van resultaten van de ImageJ Plug-in en de manuele resultaten samen met de persoonlijke beoordeling van de 2 MPEs bepaald worden  of de gebruikte technieken even goed zijn als, of beter presteren dan, een MPE.
 
 \section{Verwachte resultaten}%
 \label{sec:verwachte-resultaten}
